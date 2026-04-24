@@ -11,24 +11,40 @@
 
     <header class="admin-header">
         <h1>Painel de Controle</h1>
-        <div class="user-info">Olá, Administrador | <a href="#" style="color: #fab1a0; text-decoration: none;">Sair</a></div>
+        <div class="user-info">Olá, Administrador | <a href="index.html" style="color: #fab1a0; text-decoration: none;">Sair</a></div>
     </header>
-
-    <main class="admin-content">
-        <div class="card">
-            <h2>Bem-vindo à Área Restrita</h2>
-            <p>Este é um exemplo de layout para a sua página de administração. Role a página para baixo e veja o botão "Voltar" permanecer fixo e centralizado na direita.</p>
-        </div>
+        <div class="container">
+    <h2>Painel Administrativo</h2>
+    
+    <div class="admin-card">
+        <h3>Inserir Novo Livro</h3>
         
-        <div class="card">
-            <h3>Estatísticas Rápidas</h3>
-            <p>Usuários online: 15</p>
-            <p>Novos cadastros hoje: 3</p>
-        </div>
-    </main>
+        <form id="bookForm">
+            <div class="form-group">
+                <label for="title">Título do Livro</label>
+                <input type="text" id="title" placeholder="Ex: O Senhor dos Anéis" required>
+            </div>
 
-    <a href="index.html" class="btn-voltar">
-       &#8592; Voltar à Página Principal
-    </a>
+            <div class="form-group">
+                <label for="author">Autor</label>
+                <input type="text" id="author" placeholder="Ex: J.R.R. Tolkien" required>
+            </div>
+
+            <div class="form-group">
+                <label for="releaseDate">Data de Lançamento</label>
+                <input type="date" id="releaseDate" required>
+            </div>
+
+            <button type="submit">Salvar Livro</button>
+        </form>
+    </div>
+
+    <div class="search-section">
+        <h3>Livros Registrados</h3>
+        <div id="bookList">
+            </div>
+    </div>
+</div>
+
 </body>
 </html>
