@@ -1,0 +1,55 @@
+{         
+    "IDP": 100000,
+    
+    "titulo": "Titulo Muito Legal",
+    "subTitulo": "SubTitulo muito informativo",
+    "sumario": "Sumario explicando ainda mais",
+    "autoria": [
+        {"nome": "Autor Maneiro da", "sobrenome": "Cunha"}
+    ],
+    
+    "categoria": "??? as categorias ainda vao ser definidas",
+    "genero": "??? os generos ainda vao ser definidos",
+
+    "Edicoes": [
+        
+        {"ISBN": 1000000000000,
+
+        "nomeEdicao": "Ediçao Demais",
+        "publicadora": "PublicaMais",
+        "anoPublicacao": "Date padrão",
+
+        "tipo": "Um tipo entre três: Capa comum, Capa dura, Ebook",
+        "lingua": "A lingua do livro",
+
+        "quantidadePaginas": 100,
+        
+        "Exemplares": [
+            { "IDEx": 1,
+
+            "disponivel": true,
+
+            "localizacao": "Prateleira 45, prateleira 3, posição: 58",
+            "dataCadastro": "data de cadastro, é colocada automaticamente",
+            
+            "emprestimo":{
+                "CPF": 1111111111111
+            },
+
+            "filaEspera":[
+                {"CPF": 2222222222222},
+                {"CPF": 3333333333333}
+            ]
+            }
+        ]
+    }
+    ],
+
+    "View": {
+        "Pesquidado": 1,
+        "Almeijado": 3,
+
+        "pontosPositivos": 7,
+        "pontosNegativos": 1
+    }
+}

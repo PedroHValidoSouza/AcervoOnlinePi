@@ -1,18 +1,19 @@
 {
-  "name": "desenvolvimento",
+  "name": "bibliotecapi",
   "version": "1.0.0",
-  "description": "",
+  "description": "Uma Api de biblioteca para uso interno dos sistemas da mesma",
   "license": "ISC",
-  "author": "pedro",
+  "author": "Pedro H",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "mongodb": "^7.1.0",
+    "mongoose": "^9.4.1",
     "nodemon": "^3.1.14"
   }
 }
