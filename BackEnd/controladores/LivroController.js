@@ -30,6 +30,17 @@ const LivroController = {
         } catch(error) {
             console.log(`Error: ${error}`)
         }
+    },
+    
+    getAll: async(requisicao, resposta) => {
+        try {
+            const livros = await LivroSchema.find();
+
+            resposta.json(livros);
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
 
 };

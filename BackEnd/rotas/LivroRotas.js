@@ -9,6 +9,6 @@ router
 
 router
     .route("/Livros")
-    .get((requisicao, resposta) => LivroController.getAll(requisicao, resposta))
+    .get((requisicao, resposta) => LivroController.getAll(requisicao, resposta));
 
 module.exports = router;
