@@ -60,3 +60,7 @@ Content-Type: application/json
         "pontosNegativos": 1
     }
 }
+
+###
+
+GET http://localhost:3000//Livros

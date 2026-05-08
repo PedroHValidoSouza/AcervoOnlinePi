@@ -7,15 +7,16 @@ app.use(cors());
 app.use(express.json());
 
 
-var NomeDoProjeto = "BibliotecAPI";
+var nomeDoProjeto = "API-Biblioteca";
 const Porta = 3000;
 
-const URL = 'mongodb://localhost:27017/';
-
 const conneccao = require("./bd/coneccao");
+
+const livroRoutes = require("./rotas/LivroRotas");
+app.use("/", livroRoutes)
 
 conneccao();
 
 app.listen(Porta, () => {
-    console.log(`${NomeDoProjeto} aguardando conexões na porta ${Porta}`);
+    console.log(`${nomeDoProjeto} aguardando conexões na porta ${Porta}`);
 });

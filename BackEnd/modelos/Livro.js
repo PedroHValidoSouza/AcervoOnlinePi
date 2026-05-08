@@ -32,7 +32,9 @@ const ExemplarSchema = new Schema({
         min: 1000000000000
     },
 
-    filaEspera:Array[Number]
+    filaEspera: {
+        type: Number
+    }
 });
 
 const EdicaoSchema = new Schema({
@@ -67,7 +69,7 @@ const EdicaoSchema = new Schema({
     },
 
     Exemplares: {
-        type: Array[ExemplarSchema]
+        type: Number//Array[ExemplarSchema]
     }
 });
 
@@ -90,14 +92,14 @@ const LivroSchema = new Schema({
     },
 
     autoria: {
-        type: Array[{
+        type: Number/*Array[{
             nome:{
                 type: String
             },
             sobreNome:{
                 type: String
             }
-        }]
+        }]*/
     },
 
     categoria: {
@@ -113,7 +115,7 @@ const LivroSchema = new Schema({
     },
 
     Edicoes:{
-        type: Array[EdicaoSchema]
+        type: Number//Array[EdicaoSchema]
     },
 
     View:{

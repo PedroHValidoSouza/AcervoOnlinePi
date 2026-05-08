@@ -3,7 +3,10 @@ const mongoose = require("mongoose"); // Usado para se conectar com o mongo DB
 //Função padrão para conecção
 async function Conectar() {
     try { // Tenta conectar
+        mongoose.set("strictQuery", true)
+
         await mongoose.connect("mongodb://bibliotecaSystem:biblio-Zb0jcl!2Psc@localhost:27017/");
+        console.log("Banco conectado")
     } catch (error) { // Se capitou um erro
         console.log(`Error: ${error}`);
     } finally {// Independente do resultado
