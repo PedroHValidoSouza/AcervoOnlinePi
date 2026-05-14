@@ -34,7 +34,7 @@ const LivroController = {
     
     getAll: async(requisicao, resposta) => {
         try {
-            const livros = await LivroSchema.find();
+            const livros = await Livro.find();
 
             resposta.json(livros);
         } catch (error) {

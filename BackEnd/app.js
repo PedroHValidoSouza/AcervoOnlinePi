@@ -12,10 +12,11 @@ const Porta = 3000;
 
 const conneccao = require("./bd/coneccao");
 
-const livroRoutes = require("./rotas/LivroRotas");
-app.use("/", livroRoutes)
-
 conneccao();
+
+const router = require('./rotas/router');
+
+app.use("/API/", router);
 
 app.listen(Porta, () => {
     console.log(`${nomeDoProjeto} aguardando conexões na porta ${Porta}`);
