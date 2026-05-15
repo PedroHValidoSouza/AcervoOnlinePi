@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acervo Online PI v1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Acervo Online PI:</h1>
+    <input id="buscarI" type="text" placeholder="Livro...">
+    <button id="buscarB">buscar</button>
+    <div id="resultados">
+    </div>
+    <hr>
+
+    <h1>Criar Livros:</h1>
+    <input id="criarTitulo" type="text" placeholder="Titulo"><br>
+    <input id="criarSubTitulo" type="text" placeholder="Sub-titulo"><br>
+    <input id="criarAutor" type="text" placeholder="Autor"><br>
+    <input id="criarISBN" type="number" min='1000000000000' max='9999999999999'placeholder="Codigo ISBN"><br>
+    <input id="criarLancamento" type="number" min='1000' max="9999" placeholder="Ano"><br>
+    <input id="criarCopias" type="number" placeholder="Unidades"><br>
+    <button id="criarLivro">Criar</button>
+
+    <hr>
+    <h1>Modificar(em criação)</h1>
+    <input id="DeletarISBN" type="number" min='1000000000000' max='9999999999999'placeholder="0000000000000"><br>
+
+    <script src="index.js"></script>
+</body>
+</html>
