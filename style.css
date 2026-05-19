@@ -1,26 +1,36 @@
+/* Configuração Geral da Barra de Navegação */
 .navbar {
   display: flex;             
-  justify-content: center;   
   align-items: center;       
-  padding: 20px;
+  padding: 15px 30px;
   background-color: #f4f4f4;
-  position: relative;        
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
+/* Título do Site */
+.navbar h1 {
+  font-family: sans-serif;
+  color: #2c3e50;
+  margin: 0 30px 0 0; /* Dá um espaço de 30px à direita do título */
+  font-size: 24px;
+}
+
+/* Container que junta o Input e o Botão de Lupa */
 .search-container {
   display: flex;             
-  width: 50%;                
+  width: 40%; /* Largura da barra de pesquisa */
 }
 
 .search-input {
   flex-grow: 1;              
-  padding: 10px;
+  padding: 10px 15px;
   border: 1px solid #ccc;
   border-radius: 5px 0 0 5px; 
+  outline: none;
 }
 
 .search-btn {
-  padding: 10px;
+  padding: 10px 15px;
   background: #007bff;
   color: white;
   border: none;
@@ -28,42 +38,19 @@
   cursor: pointer;
 }
 
-.admin-link {
-  position: absolute;        
-  right: 20px;
-  text-decoration: none;
-  font-weight: bold;
-}
-.header-container {
-  display: flex;          
-  align-items: center;   
-  justify-content: flex-end;
-  gap: 15px;              
-  padding: 20px;      
-}
-
-
-.search-bar {
-  padding: 8px 15px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  outline: none;
-}
-
-.admin-button {
-/* Container para empurrar o botão para a direita */
+/* O SEGREDO DO ALINHAMENTO: 
+   Este container vai empurrar tudo o que estiver dentro dele para o extremo direito */
 .admin-container {
+  margin-left: auto; /* Empurra o container para a direita */
   display: flex;
-  justify-content: flex-end; /* Alinha o conteúdo totalmente à direita */
-  padding: 20px;             /* Espaço em relação às bordas da tela */
 }
 
-
+/* Estilização Visual do Botão Admin */
 .admin-link {
   display: inline-block;      
   background-color: #2c3e50;  
   color: #ffffff;             
-  padding: 10px 25px;        
+  padding: 10px 20px;        
   text-decoration: none;    
   border-radius: 4px;       
   font-family: sans-serif;
@@ -71,7 +58,6 @@
   transition: all 0.3s ease;  
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
 
 .admin-link:hover {
   background-color: #34495e;
@@ -81,5 +67,4 @@
 
 .admin-link:active {
   transform: translateY(0);
-}
 }
