@@ -147,3 +147,25 @@ button:hover {
   align-items: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
+.toolbar {
+  display: flex;
+  align-items: center;       /* Alinha os dois verticalmente pelo centro */
+  justify-content: space-between; /* Empurra a pesquisa para a esquerda e o botão para a direita */
+  gap: 15px;                 
+  margin: 30px auto;         /* Centraliza o bloco na tela e dá espaço do cabeçalho */
+  max-width: 1000px;         /* Aumentamos um pouco para que fiquem mais espalhados nas pontas */
+  width: 100%;
+  padding: 0 40px;           /* Distância confortável das bordas da tela */
+  
+  /* Remove o efeito de "túnel" */
+  background-color: transparent !important; 
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Garante que a barra de pesquisa não passe do tamanho ideal na esquerda */
+.search-container {
+  display: flex;
+  width: 100%;
+  max-width: 500px;          /* Define o tamanho limite da barra de busca */
+}
