@@ -35,8 +35,7 @@ const LivroController = {
     getAll: async(requisicao, resposta) => {
         try {
             const livros = await Livro.find();
-
-            resposta.json(livros);
+            resposta.status(200).json(livros);
         } catch (error) {
             console.log(error);
         }

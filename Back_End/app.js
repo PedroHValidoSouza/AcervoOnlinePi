@@ -1,5 +1,5 @@
-const express = require("express"); //Permite o uso e processamento de Json
-const cors = require('cors'); // Permite o uso da api por uma URl diferente
+const express = require("express");
+const cors = require('cors'); // Para o uso da api por uma URl diferente
 
 var app = express();
 app.use(cors());

@@ -118,22 +118,6 @@ const LivroSchema = new Schema({
         type: Number//Array[EdicaoSchema]
     },
 
-    View:{
-        Pesquidado:{
-            type: Number
-        },
-
-        Almeijado:{
-            type: Number
-        },
-
-        pontosPositivos:{
-            type: Number
-        },
-        pontosNegativos:{
-            type:Number
-        }
-    }
 });
 
 const Exemplar = mongoose.model("Exemplar", ExemplarSchema);

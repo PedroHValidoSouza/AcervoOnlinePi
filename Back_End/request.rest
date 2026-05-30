@@ -63,5 +63,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/Livros
+GET http://localhost:3000/API/Livros
 Content-Type: application/json
