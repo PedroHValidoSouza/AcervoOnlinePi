@@ -40,9 +40,8 @@ const ExemplarSchema = new Schema({
 
     emprestimo: [EmprestimoSchema],
 
-    filaEspera: {
-        type: Array[Number]
-    }
+    filaEspera: [Number]
+    
 });
 
 module.exports = {

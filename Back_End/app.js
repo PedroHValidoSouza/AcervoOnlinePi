@@ -16,7 +16,7 @@ conneccao();
 
 const router = require('./rotas/router');
 
-app.use("/API/", router);
+app.use("/Api/", router);
 
 app.listen(Porta, () => {
     console.log(`${nomeDoProjeto} aguardando conexões na porta http://localhost:${Porta}/Api/`);

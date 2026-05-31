@@ -3,62 +3,49 @@ POST http://localhost:3000/Livros
 Content-Type: application/json
 
 {         
-    "IDP": 100000,
+"IDO": 100002,
+
+"titulo": "Livro Super Legal",
+"subTitulo": "O Melhor livro de todos",
+"textoAuxiliar": "",
+
+"sumario": "Um livro hiper maneiro que você vai amar",
+"autoria": [{
+    "nome": "Altour",
+    "sobreNome": "Maneiro"}
+],
+
+"ficcao": false,
+"categoria": "Entreterimento",
+
+"Edicoes":[{
+    "ISBN": 1000000000001,
     
-    "titulo": "Titulo Muito Legal",
-    "subTitulo": "SubTitulo muito informativo",
-    "sumario": "Sumario explicando ainda mais",
-    "autoria": [
-        {"nome": "Autor Maneiro da", "sobrenome": "Cunha"}
-    ],
+    "nomeEdicao": "",
+    "publicadora": "Publicadora Legalzinha",
+    "anoPublicacao": "Date",
     
-    "categoria": "??? as categorias ainda vao ser definidas",
-    "genero": "??? os generos ainda vao ser definidos",
-
-    "Edicoes": [
-        
-        {"ISBN": 1000000000000,
-
-        "nomeEdicao": "Ediçao Demais",
-        "publicadora": "PublicaMais",
-        "anoPublicacao": "Date padrão",
-
-        "tipo": "Um tipo entre três: Capa comum, Capa dura, Ebook",
-        "lingua": "A lingua do livro",
-
-        "quantidadePaginas": 100,
-        
-        "Exemplares": [
-            { "IDEx": 1,
-
-            "disponivel": true,
-
-            "localizacao": "Prateleira 45, prateleira 3, posição: 58",
-            "dataCadastro": "data de cadastro, é colocada automaticamente",
-            "emprestimo":{
-                "CPF": 1111111111111,
-                "nome": "Emprestador da Silva",
-                "dataDevolucao": "data de devolução"
-            },
-
-            "filaEspera":[
-                {"CPF": 2222222222222,
-                "Nome": "Paciente Romaro"},
-                {"CPF": 3333333333333,
-                "Nome": "Lia Mais"}
-            ]
-            }
+    "lingua": "Português-Brasil",
+    "quantidadePaginas": 101,
+    
+    "capaFrente": "",
+    
+    "Exemplares": [{
+        "IDEx": 101,
+        "disponivel": false,
+        "localizacao": "",
+        "dataCadastro": "Date",
+    
+        "emprestimo": [{  
+            "CPF": 1000000000001,
+            "dataEmprestimo": "data",
+            "dataDevolucao": "data"
+        }
         ]
     }
-    ],
-
-    "View": {
-        "Pesquidado": 1,
-        "Almeijado": 3,
-
-        "pontosPositivos": 7,
-        "pontosNegativos": 1
-    }
+    ]
+}
+]
 }
 
 ###
