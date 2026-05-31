@@ -37,6 +37,7 @@ const EdicaoSchema = new Schema({
 
     Exemplares: [ExemplarSchema]
 });
+
 module.exports = {
     EdicaoSchema
 }

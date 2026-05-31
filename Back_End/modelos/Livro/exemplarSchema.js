@@ -45,9 +45,6 @@ const ExemplarSchema = new Schema({
     }
 });
 
-const exemplar = mongoose.model("exemplar",ExemplarSchema)
-
 module.exports = {
-    exemplar,
     ExemplarSchema
 }
