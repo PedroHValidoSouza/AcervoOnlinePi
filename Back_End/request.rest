@@ -1,5 +1,5 @@
 
-POST http://localhost:3000/Livros
+POST http://localhost:3000/Api/Livros
 Content-Type: application/json
 
 {         
@@ -18,12 +18,12 @@ Content-Type: application/json
 "ficcao": false,
 "categoria": "Entreterimento",
 
-"Edicoes":[{
-    "ISBN": 1000000000001,
+"Edicoes":[
+    {"ISBN": 1000000000001,
     
     "nomeEdicao": "",
     "publicadora": "Publicadora Legalzinha",
-    "anoPublicacao": "Date",
+    "anoPublicacao": "2024-06-01",
     
     "lingua": "Português-Brasil",
     "quantidadePaginas": 101,
@@ -34,12 +34,12 @@ Content-Type: application/json
         "IDEx": 101,
         "disponivel": false,
         "localizacao": "",
-        "dataCadastro": "Date",
+        "dataCadastro": "2024-06-01",
     
         "emprestimo": [{  
             "CPF": 1000000000001,
-            "dataEmprestimo": "data",
-            "dataDevolucao": "data"
+            "dataEmprestimo": "2024-06-01",
+            "dataDevolucao": "2024-06-01"
         }
         ]
     }
@@ -50,5 +50,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/API/Livros
+GET http://localhost:3000/Api/Livros
 Content-Type: application/json

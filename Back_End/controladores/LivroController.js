@@ -1,15 +1,59 @@
 const {obra, ObraSchema} = require("../modelos/Livro/obraSchema.js")
 
 const livroController = {
+    //#region creates
     create: async(requisicao, resposta) => {
         try{
             const livro = obra(requisicao.body);
             await livro.save()
-            resposta.status(201)
+            resposta.status(201).resposta("Livro criado com exito")
         } catch(error) {
             console.log(`Error: ${error}`);
         }
     },
+
+    create_edicao: async(requisicao, resposta) => {
+        try{
+            const { idO } = req.params;
+            const novaEdicao = req.body; // Deve conter todos os campos de edição conforme schema
+
+            const livroAtualizado = await Livro.findOneAndUpdate(
+              { IDO: idO },
+              { $push: { Edicoes: novaEdicao } },
+              { new: true }
+            );
+        
+            if (!livroAtualizado) {
+              return res.status(404).json({ message: "Livro não encontrado" });
+            }
+        
+            res.status(201).resposta({"Status": "Edicao criada com exito"}).json(livroAtualizado);
+        } catch(error) {
+            console.log(`Error: ${error}`);
+        }
+    },
+
+    create_exemplar: async(requisicao, resposta) => {
+        try{
+            const { idO, iSBN } = req.params;
+            const novoExemplar = req.body; // Deve conter campos de exemplar conforme schema
+                
+            const livroAtualizado = await Livro.findOneAndUpdate(
+              { IDO: ido, "Edicoes.ISBN": Number(iSBN) },
+              { $push: { "Edicoes.$.Exemplares": novoExemplar } },
+              { new: true }
+            );
+        
+            if (!livroAtualizado) {
+              return res.status(404).json({ message: "Livro ou edição não encontrada" });
+            }
+        
+            resposta.status(201).resposta("Exemplar criado com exito")
+        } catch(error) {
+            console.log(`Error: ${error}`);
+        }
+    },
+    //#endregion
 
     get: async(requisicao, resposta) => {
         try {
@@ -93,11 +137,92 @@ const livroController = {
         }
 
         const livros = await Livro.find(filtro);
-        res.status(200).json(livros);
+            if (livros == []){
+                res.status(404).json({"Status": "Não Encontrado"})
+            } else {
+                res.status(200).json(livros);
+            }
 
         } catch(error) {
             console.log(error);
         }
+    },
+
+    update: async(requisicao, resposta) => {
+        try {
+            const { idO } = req.params;
+            // O body deve conter todo objeto obra! (incluindo Edicoes, autoria, etc.)
+            const novaObra = req.body;
+
+            // Substitui todos os campos da obra menos o _id do Mongo
+            const obraAtualizada = await Livro.findOneAndUpdate(
+              { IDO: idO },
+              novaObra,
+              { new: true, overwrite: true }
+            );
+
+            if (!obraAtualizada) {
+              return res.status(404).json({ "Status": "Livro não encontrada" });
+            }
+            res.status(200).json(obraAtualizada);
+        } catch(error) {
+            console.log(error);
+        }
+    },
+
+    //#region Deletes
+    delete: async(requisicao, resposta) => {
+        try{
+            const livroRemovido = await Livro.findOneAndDelete({IDO:requisicao.params.idO})
+            if (!livroRemovido) {
+                return res.status(404).json({"Status": "Livro Não Encontrado"});
+            }
+            res.status(200).json({ message: "Livro removido com sucesso" });
+        } catch(error) {
+            console.log(error);
+        }
+    },
+
+    delete_edicao: async(requisicao, resposta) => {
+        try{
+            const idO = requisicao.params.idO;
+            const iSBN = requisicao.params.iSBN;
+            
+            const resultado = await Livro.findOneAndUpdate(
+                { IDO: idO },
+                { $pull: { Edicoes: { ISBN: Number(iSBN) } } },
+                { new: true }
+            );
+
+            if (!resultado) {
+                return res.status(404).json({"Status": "Edição Não Encontrado"});
+            }
+            res.status(200).json({ "Status": "Edição removido com sucesso" });
+        } catch(error) {
+            console.log(error);
+        }
+    },
+
+    delete_exemplar: async(requisicao, resposta) => {
+        try{
+            const { idO, iSBN, idEx } = req.params;
+
+            // Localiza o livro pela obra (IDO) e edição (ISBN), depois faz $pull no array Exemplares dentro da edição correta
+            const resultado = await Livro.findOneAndUpdate(
+              { IDO: idO, "Edicoes.ISBN": Number(iSBN) },
+              { $pull: { "Edicoes.$.Exemplares": { IDEx: Number(idEx) } } },
+              { new: true }
+            );
+        
+            if (!resultado) {
+              return res.status(404).json({"Status": "Exemplar Não Encontrado"});
+            }
+            res.status(200).json({ "Status": "Exemplar removido com sucesso", livro: resultado });
+        } catch(error) {
+            console.log(error);
+        }
     }
-    
+    //#endregion
 }
+
+module.exports = livroController;

@@ -1,18 +1,18 @@
 const router = require("express").Router();
 
-const LivroController = require("../controladores/livroController");
+const livroController = require("../controladores/livroController");
 
 
 router
     .route("/livros")
-    .post((requisicao, resposta) => LivroController.create(requisicao, resposta));
+    .post((requisicao, resposta) => livroController.create(requisicao, resposta));
 
 router
     .route("/livros")
-    .get((requisicao, resposta) => LivroController.get(requisicao, resposta));
+    .get((requisicao, resposta) => livroController.get(requisicao, resposta));
 
 router
     .route("/livros_params")
-    .get((requisicao, resposta) => LivroController.getParams(requisicao, resposta));    
+    .get((requisicao, resposta) => livroController.getParams(requisicao, resposta));    
 
 module.exports = router;
