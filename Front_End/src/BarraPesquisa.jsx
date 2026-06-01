@@ -1,14 +1,17 @@
+import React from 'react';
 
-function BarraPesquisa({ onPesquisa }) { // <- Recebe a propriedade onPesquisa aqui
+
+function BarraPesquisa({ valor, aoMudar }) {
   return (
-    <div className="search-container">
-      <input 
-        type="text" 
-        placeholder="Pesquisar livros..." 
-        className="search-input" 
-        onChange={(e) => onPesquisa(e.target.value)} // <- Dispara a busca a cada letra digitada
+    <div className="barra-pesquisa-wrapper">
+      <input
+        type="text"
+        placeholder="Pesquisar livros..."
+        value={valor}
+        onChange={(e) => aoMudar(e.target.value)}
+        className="barra-pesquisa-input"
       />
-      <button className="search-btn">🔍</button>
+      <button className="barra-pesquisa-botao">🔍</button>
     </div>
   );
 }

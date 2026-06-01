@@ -169,3 +169,91 @@ button:hover {
   width: 100%;
   max-width: 500px;          /* Define o tamanho limite da barra de busca */
 }
+/* Container que envolve todos os cards */
+.lista-produtos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* O estilo de cada Card individual */
+.livro-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  width: 250px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Efeito sutil ao passar o mouse no card */
+.livro-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.livro-titulo {
+  color: #333333;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.livro-autor, .livro-data {
+  color: #666663;
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+.sem-resultados {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 20px;
+}
+.pesquisa-container-flex {
+  display: flex;
+  justify-content: space-between; /* Empurra a barra para a esquerda e o botão para a direita */
+  align-items: center;           /* Alinha os dois verticalmente no centro */
+  width: 100%;                   /* Garante que use a largura total da tela */
+  max-width: 1200px;            
+  margin: 20px auto;             
+  padding: 0 20px;           
+}
+.pesquisa-secao-home {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;            
+  width: 100%;                    
+  max-width: 1200px;              
+  margin: 30px auto;              
+  padding: 0 40px;                
+}
+
+
+.barra-pesquisa-wrapper {
+  display: flex;
+  flex: 1;                        
+  max-width: 500px;               
+}
+
+.pesquisa-secao-home {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;            
+  width: 100%;                    
+  max-width: 1140px;              
+  margin: 30px auto;              
+  padding: 0 20px;               
+  box-sizing: border-box;         
+}
+
+
+.barra-pesquisa-wrapper {
+  display: flex;
+  flex: 1;                        
+  max-width: 500px;               
+}

@@ -27,43 +27,50 @@ function App() {
         livro.titulo.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
         livro.autor.toLowerCase().includes(termoPesquisa.toLowerCase())
       );
-
-  return (
+return (
     <BrowserRouter>
-      <Routes>
+      <div className="app-container">
         
-        {/* ROTA DO USUÁRIO */}
-        <Route 
-        path="/" 
-          element = {<>
-      <Cabecalho /> {/* <--- Garanta que essa linha está aqui! */}
-      
-      <div className="toolbar">
-        <BarraPesquisa onPesquisa={setTermoPesquisa} />
-        <BotaoAdmin />
+     <Routes>
+          
+          {/* ROTA DO USUÁRIO COMUM (Home) */}
+          <Route 
+            path="/" 
+            element={
+              <>
+                <Cabecalho />
+                
+                {/* Contêiner principal para alinhar a pesquisa e o botão Admin */}
+                <div className="pesquisa-secao-home">
+                  <BarraPesquisa valor={termoPesquisa} aoMudar={setTermoPesquisa} />
+                  <BotaoAdmin /> 
+                </div>
+
+                <Lista livros={livrosFiltrados} termoPesquisa={termoPesquisa} />
+              </>
+            } 
+          />
+
+          {/* ROTA DO ADMINISTRADOR */}
+          <Route 
+            path="/admin" 
+            element={
+              <>
+                <CabecalhoAdmin />
+                <Formulario aoAdicionar={adicionarLivro} />
+                
+                <div className="pesquisa-secao-home">
+                  <BarraPesquisa valor={termoPesquisa} aoMudar={setTermoPesquisa} />
+                </div>
+
+                <Lista livros={livrosFiltrados} termoPesquisa={termoPesquisa} />
+              </>
+            } 
+          />
+
+        </Routes>
+
       </div>
-      
-      {termoPesquisa.trim() !== '' && (
-        <Lista livros={livrosFiltrados} />
-      )}
-         </>
-        } 
-       />
-
-        {/* ROTA DO ADMIN */}
-        <Route 
-          path="/admin" 
-          element={
-            <div className="admin-page-container" style={{ padding: '20px' }}>
-              <CabecalhoAdmin />
-              <Formulario onAdicionarLivro={adicionarLivro} />
-              {/* No Admin, se você quiser ver todos os livros sempre, passe 'livros'. Se não quiser ver nada, pode remover a linha abaixo */}
-              <Lista livros={livros} /> 
-            </div>
-          } 
-        />
-
-      </Routes>
     </BrowserRouter>
   );
 }

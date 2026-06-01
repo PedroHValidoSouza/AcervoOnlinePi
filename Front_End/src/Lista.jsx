@@ -1,24 +1,29 @@
+import React from 'react';
+ 
 
-function Lista ({ livros }) {
-    return (
-      <div className="search-section">
-        <h3>Livros Registrados</h3>
-        <div id="bookList">
-          {livros.length === 0 ? (
-            <p style={{ color: '#64748b', textAlign: 'center' }}>Nenhum livro registrado no momento.</p>
-          ) : (
-            livros.map((livro, index) => (
-              <div key={index} className="book-item">
-                <div>
-                  <strong>{livro.titulo}</strong> - {livro.autor}
-                </div>
-                <span>Lançado em: {livro.data}</span>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
-    );
-  }
+function Lista({ livros, termoPesquisa }) {
   
-  export default Lista
+  // 1º PASSO: Se a barra estiver vazia, não mostra nada na tela
+  if (!termoPesquisa || termoPesquisa.trim() === '') {
+    return null; 
+  }
+
+  // 2º PASSO: Se digitou algo mas a lista de filtrados é zero, mostra a mensagem
+  if (livros.length === 0) {
+    return <p className="sem-resultados">Nenhum livro encontrado.</p>;
+  }
+
+  // 3º PASSO: Se encontrou livros, renderiza os cards
+  return (
+    <div className="lista-produtos-container">
+      {livros.map((livro, index) => (
+        <div key={index} className="livro-card">
+          <h3 className="livro-titulo">{livro.titulo}</h3>
+          <p className="livro-autor"><strong>Autor:</strong> {livro.autor}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default Lista;
