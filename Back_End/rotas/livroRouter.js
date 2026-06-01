@@ -12,7 +12,11 @@ router
     .get((requisicao, resposta) => livroController.get(requisicao, resposta));
 
 router
-    .route("/livros_params")
-    .get((requisicao, resposta) => livroController.getParams(requisicao, resposta));    
+    .route("/livrosUpd")
+    .patch((requisicao, resposta) => livroController.update(requisicao, resposta));
+
+router
+    .route("/livrosDel")
+    .delete((requisicao, resposta) => livroController.delete(requisicao, resposta));    
 
 module.exports = router;
