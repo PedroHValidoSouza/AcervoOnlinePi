@@ -1,126 +1,36 @@
-# Libzary — Sistema de Acervo
+# 📚 Libzary — Sistema de Acervo
 
-Aplicação full-stack unificada combinando o **AcervoOnlinePi** (API Node/Express/MongoDB) com o **frontend React** do ArchitectUI, reescrita de forma simples, sem animações e totalmente integrada à API real.
+Aplicação full-stack que combina uma API REST construída com Node.js, Express e MongoDB com um front-end em React baseado no ArchitectUI. Desenvolvida como Projeto Integrador do 3º semestre da FATEC, aplicando metodologia de project-learning para reforçar conceitos de APIs RESTful, programação declarativa e trabalho em equipe.
 
----
+## 👨‍💻 Equipe
 
-## Estrutura do projeto
+| Membro | Função | Contribuição |
+|--------|--------|--------------|
+| **[Pedro Henrique](https://github.com/PedroHValidoSouza)** | Idealizador | Desenvolvimento da API REST e arquitetura do back-end |
+| **[Leonardo Andrade](https://github.com/ammeloleo)** | Scrum Master | Desenvolvimento full-stack e organização do projeto |
+| **[Felipe Augusto](https://github.com/shadow999089)** | Desenvolvedor Front-end | Prototipagem inicial e evolução da interface |
+| **[Lucas Henrique](https://github.com/SoserLucas)** | Pesquisador | Padronização e inserção de dados para testes |
 
-```
-biblioteca-unificada/
-├── backend/              ← API REST (Node.js + Express + MongoDB)
-│   ├── app.js            ← Entrada do servidor
-│   ├── .env              ← Variáveis de ambiente (MONGO_URI, PORT)
-│   ├── bd/
-│   │   └── coneccao.js   ← Conexão com o MongoDB via Mongoose
-│   ├── modelos/
-│   │   └── Livro/
-│   │       ├── obraSchema.js     ← Schema principal da obra
-│   │       ├── edicaoSchema.js   ← Sub-schema de edição
-│   │       └── exemplarSchema.js ← Sub-schema de exemplar + empréstimo
-│   ├── controladores/
-│   │   └── livroController.js ← Lógica CRUD (Create/Read/Update/Delete)
-│   └── rotas/
-│       ├── router.js      ← Roteador principal (/Api/)
-│       └── livroRouter.js ← Rotas específicas de livros
-│
-└── frontend/             ← Interface React (Vite)
-    ├── vite.config.js    ← Proxy /Api → localhost:3000
-    ├── src/
-    │   ├── main.jsx      ← Ponto de entrada React
-    │   ├── App.jsx       ← Rotas e controle de autenticação
-    │   ├── index.css     ← Estilos globais (sem animações)
-    │   ├── services/
-    │   │   └── api.js    ← Todas as chamadas HTTP à API
-    │   └── pages/
-    │       ├── LoginPage.jsx    ← Tela de login
-    │       ├── AdminLayout.jsx  ← Layout com sidebar
-    │       ├── AdminHome.jsx    ← Dashboard com estatísticas reais
-    │       ├── LivrosPage.jsx   ← Lista do acervo com CRUD
-    │       ├── CadastrarPage.jsx ← Formulário de cadastro
-    │       ├── EditarPage.jsx    ← Edição de obra
-    │       └── BuscaPage.jsx    ← Busca com filtros
-```
+## ❓ Perguntas Frequentes
 
----
+### Por que um sistema de biblioteca?
 
-## Como rodar
+> Todo curso de desenvolvimento que se preze desenvolve um sistema de biblioteca. Escolhemos este por ser um projeto complexo que nos obrigaria a simplificar e modelar dados adequadamente. O banco de dados não relacional foi a escolha perfeita pela diferenciação entre obras (ex: *Alienista* de Machado de Assis), edições (ex: Editora Ática) e exemplares (cópias de uma mesma edição).
 
-### 1. Configurar o MongoDB
+### Por que essas tecnologias?
 
-Edite `backend/.env` com sua string de conexão:
+> Selecionamos tecnologias recém-aprendidas para aplicar na prática. O MongoDB foi ideal pela flexibilidade em armazenar informações heterogêneas de obras, edições e exemplares. Node.js foi escolhido pela praticidade e familiaridade com JavaScript. React foi utilizado para construir componentes de forma limpa, declarativa e reutilizável.
 
-```env
-MONGO_URI=mongodb://localhost:27017/biblioteca
-PORT=3000
-```
+### Pretende-se melhorar o projeto?
 
-### 2. Iniciar o backend
+> Sim, temos planos de aprimoramento. No entanto, questões de tempo e novas ideias cercam o projeto de incertezas. Nosso compromisso é manter a manutenção contínua e atualizar o projeto conforme a evolução das tecnologias.
 
-```bash
-cd backend
-npm install
-npm run dev
-```
+## 🛠️ Stack Tecnológico
 
-A API estará em: `http://localhost:3000/Api/`
+- **Back-end**: Node.js, Express.js, MongoDB
+- **Front-end**: React, ArchitectUI
+- **Metodologia**: Project-Learning
 
-### 3. Iniciar o frontend
+## 📧 Contato
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-A aplicação estará em: `http://localhost:5173`
-
----
-
-## Rotas da API
-
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| GET    | /Api/livros | Lista todas as obras |
-| POST   | /Api/livros | Cria obra completa |
-| GET    | /Api/livros/:idO | Busca obra por IDO |
-| PATCH  | /Api/livros/:idO | Atualiza obra |
-| DELETE | /Api/livros/:idO | Remove obra |
-| POST   | /Api/livros/:idO/edicoes | Adiciona edição |
-| DELETE | /Api/livros/:idO/edicoes/:iSBN | Remove edição |
-| POST   | /Api/livros/:idO/edicoes/:iSBN/exemplares | Adiciona exemplar |
-| DELETE | /Api/livros/:idO/edicoes/:iSBN/exemplares/:idEx | Remove exemplar |
-
----
-
-## Acesso admin
-
-Login de demonstração: `admin` / `biblioteca123`
-
----
-
-## Exemplo de corpo para POST /Api/livros
-
-```json
-{
-  "IDO": 100001,
-  "titulo": "Dom Casmurro",
-  "subTitulo": "",
-  "sumario": "Narrativa sobre memória e ciúme.",
-  "autoria": [{ "nome": "Machado", "sobreNome": "de Assis" }],
-  "ficcao": true,
-  "categoria": "Romance",
-  "Edicoes": [{
-    "ISBN": 9788535910667,
-    "publicadora": "Companhia das Letras",
-    "anoPublicacao": "1899-01-01",
-    "lingua": "Português-Brasil",
-    "quantidadePaginas": 256,
-    "Exemplares": [{
-      "IDEx": 101,
-      "disponivel": true,
-      "localizacao": "Estante A-2"
-    }]
-  }]
-}
-```
+Para dúvidas ou sugestões, entre em contato com os desenvolvedores através de seus perfis do GitHub.
