@@ -1,13 +1,9 @@
-// 741 — CadastrarPage: formulário para criação de uma nova obra no acervo.
-// Ao submeter, envia um POST /Api/livros com a estrutura completa do ObraSchema,
-// incluindo ao menos uma edição e ao menos um exemplar, conforme a API exige.
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { criarLivro } from '../services/api'
 
-// 741 — Estado inicial do formulário mapeando os campos do ObraSchema.
-// Os campos obrigatórios são IDO e titulo. Os demais são opcionais.
+
 const FORM_INICIAL = {
     IDO: '',
     titulo: '',
@@ -38,7 +34,6 @@ export default function CadastrarPage() {
     const [enviando, setEnviando] = useState(false)
     const navigate                = useNavigate()
 
-    // 741 — Atualiza o campo correspondente no estado do formulário.
     function handleChange(e) {
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
     }
@@ -48,8 +43,6 @@ export default function CadastrarPage() {
         setErro('')
         setEnviando(true)
 
-        // 741 — Monta o objeto seguindo exatamente o formato do ObraSchema/LivroExemplo.json.
-        // A API espera Edicoes como array de objetos com Exemplares embutidos.
         const corpo = {
             IDO:           Number(form.IDO),
             titulo:        form.titulo,
@@ -66,8 +59,6 @@ export default function CadastrarPage() {
                 ISBN:              Number(form.ISBN),
                 nomeEdicao:        form.nomeEdicao,
                 publicadora:       form.publicadora,
-                // 741 — anoPublicacao é enviado como string ISO (YYYY-MM-DD).
-                // O Mongoose converte automaticamente para Date.
                 anoPublicacao:     form.anoPublicacao || undefined,
                 lingua:            form.lingua,
                 quantidadePaginas: form.quantidadePaginas ? Number(form.quantidadePaginas) : undefined,
@@ -99,7 +90,6 @@ export default function CadastrarPage() {
             <form onSubmit={handleSubmit}>
 
                 {/* ── DADOS DA OBRA ────────────────────────────────── */}
-                {/* 741 — Seção 1: campos que descrevem a obra abstrata (independente da edição) */}
                 <div className="card">
                     <strong className="mb-8" style={{ display: 'block' }}>Dados da Obra</strong>
                     <div className="form-grid">
@@ -128,7 +118,6 @@ export default function CadastrarPage() {
                         </div>
                         <div className="form-grupo">
                             <label htmlFor="ficcao">Tipo</label>
-                            {/* 741 — ficcao é Boolean no Schema; convertemos a string do select no submit */}
                             <select id="ficcao" name="ficcao" value={form.ficcao} onChange={handleChange}>
                                 <option value="">— Selecionar —</option>
                                 <option value="true">Ficção</option>
@@ -157,7 +146,6 @@ export default function CadastrarPage() {
                 </div>
 
                 {/* ── DADOS DA EDIÇÃO ──────────────────────────────── */}
-                {/* 741 — Seção 2: campos do EdicaoSchema para a primeira edição da obra */}
                 <div className="card">
                     <strong className="mb-8" style={{ display: 'block' }}>Primeira Edição</strong>
                     <div className="form-grid col-3">
@@ -180,7 +168,6 @@ export default function CadastrarPage() {
                         </div>
                         <div className="form-grupo">
                             <label htmlFor="anoPublicacao">Ano de Publicação</label>
-                            {/* 741 — Input date; enviamos como YYYY-MM-DD e o Mongoose converte para Date */}
                             <input id="anoPublicacao" name="anoPublicacao" type="date"
                                 value={form.anoPublicacao} onChange={handleChange} />
                         </div>
@@ -198,7 +185,6 @@ export default function CadastrarPage() {
                 </div>
 
                 {/* ── DADOS DO EXEMPLAR ─────────────────────────────── */}
-                {/* 741 — Seção 3: campos do ExemplarSchema para o primeiro exemplar físico */}
                 <div className="card">
                     <strong className="mb-8" style={{ display: 'block' }}>Primeiro Exemplar Físico</strong>
                     <div className="form-grid col-3">

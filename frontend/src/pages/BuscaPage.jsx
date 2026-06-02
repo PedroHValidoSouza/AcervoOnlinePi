@@ -1,7 +1,3 @@
-// 741 — BuscaPage: permite pesquisar obras no acervo real do MongoDB.
-// A busca é feita localmente (client-side) sobre os dados retornados pela API,
-// filtrando por título, autor ou categoria sem precisar de endpoint específico.
-// Para acervos grandes, considere implementar busca server-side com query params.
 
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -16,31 +12,25 @@ export default function BuscaPage() {
     const [filtroFiccao, setFiltroFiccao]       = useState('')
     const navigate = useNavigate()
 
-    // 741 — Carrega todos os livros uma vez; a filtragem é feita no useMemo abaixo.
     useEffect(() => {
         getLivros()
             .then(dados => { setLivros(dados || []); setCarregando(false) })
             .catch(e    => { setErro(e.message); setCarregando(false) })
     }, [])
 
-    // 741 — useMemo recalcula a lista filtrada apenas quando busca ou filtros mudam,
-    // evitando reprocessamento desnecessário a cada render.
     const resultado = useMemo(() => {
         const q     = busca.trim().toLowerCase()
         const cat   = filtroCategoria.trim().toLowerCase()
         const ficcao = filtroFiccao
 
         return livros.filter(livro => {
-            // 741 — matchTexto: verifica se a busca aparece no título ou na autoria
             const matchTexto = !q ||
                 livro.titulo?.toLowerCase().includes(q) ||
                 livro.autoria?.some(a =>
                     `${a.nome} ${a.sobreNome}`.toLowerCase().includes(q)
                 )
-            // 741 — matchCategoria: verifica se a categoria contém o filtro
             const matchCategoria = !cat ||
                 livro.categoria?.toLowerCase().includes(cat)
-            // 741 — matchFiccao: filtra por tipo (ficção/não-ficção) se selecionado
             const matchFiccao = ficcao === '' ||
                 (ficcao === 'true' && livro.ficcao === true) ||
                 (ficcao === 'false' && livro.ficcao === false)
@@ -57,7 +47,6 @@ export default function BuscaPage() {
 
             {erro && <div className="msg-erro">{erro}</div>}
 
-            {/* 741 — Filtros controlados: cada input atualiza o estado que dispara o useMemo */}
             <div className="card">
                 <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 12 }}>
                     <div className="form-grupo">
@@ -87,7 +76,6 @@ export default function BuscaPage() {
                         </select>
                     </div>
                 </div>
-                {/* 741 — Contagem de resultados exibida em tempo real */}
                 <p className="texto-leve" style={{ marginTop: 10, fontSize: 12 }}>
                     {carregando ? 'Carregando...' : `${resultado.length} resultado(s) encontrado(s)`}
                 </p>
@@ -115,7 +103,6 @@ export default function BuscaPage() {
                             </thead>
                             <tbody>
                                 {resultado.map(livro => {
-                                    // 741 — Calcula quantos exemplares estão disponíveis para empréstimo
                                     const disponiveis = livro.Edicoes?.reduce((acc, e) =>
                                         acc + (e.Exemplares?.filter(ex => ex.disponivel).length || 0), 0) || 0
 

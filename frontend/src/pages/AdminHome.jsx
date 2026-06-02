@@ -1,6 +1,3 @@
-// 741 — AdminHome: página inicial do painel administrativo.
-// Faz uma chamada à API para contar o total de obras no banco
-// e exibe estatísticas simples. Sem dados mockados — tudo vem do MongoDB.
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -11,8 +8,6 @@ export default function AdminHome() {
     const [carregando, setCarregando] = useState(true)
     const [erro, setErro]         = useState('')
 
-    // 741 — useEffect sem dependências roda uma vez após a montagem do componente.
-    // Aqui busca todos os livros para calcular as estatísticas do dashboard.
     useEffect(() => {
         getLivros()
             .then(dados => {
@@ -25,8 +20,6 @@ export default function AdminHome() {
             })
     }, [])
 
-    // 741 — Calcula estatísticas derivadas da lista de livros carregada.
-    // totalExemplares soma todos os exemplares de todas as edições de todas as obras.
     const totalObras = livros.length
     const totalEdicoes = livros.reduce((acc, l) => acc + (l.Edicoes?.length || 0), 0)
     const totalExemplares = livros.reduce((acc, l) =>
@@ -43,14 +36,12 @@ export default function AdminHome() {
                 <h1>Dashboard</h1>
             </div>
 
-            {/* 741 — Exibe o erro de conexão caso a API não esteja acessível */}
             {erro && <div className="msg-erro">{erro}</div>}
 
             {carregando ? (
                 <p className="texto-leve">Carregando dados...</p>
             ) : (
                 <>
-                    {/* 741 — Estatísticas calculadas a partir dos dados reais do banco */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 24 }}>
                         <StatCard titulo="Total de Obras" valor={totalObras} />
                         <StatCard titulo="Edições" valor={totalEdicoes} />
@@ -58,7 +49,6 @@ export default function AdminHome() {
                         <StatCard titulo="Disponíveis" valor={totalDisponiveis} cor="verde" />
                     </div>
 
-                    {/* 741 — Últimas 5 obras cadastradas como preview rápido */}
                     <div className="card">
                         <div className="flex-gap mb-16" style={{ justifyContent: 'space-between' }}>
                             <strong>Obras recentes</strong>
@@ -78,7 +68,6 @@ export default function AdminHome() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* 741 — Exibe apenas as últimas 5 obras para o dashboard */}
                                     {livros.slice(-5).reverse().map(livro => (
                                         <tr key={livro._id}>
                                             <td className="texto-leve">{livro.IDO}</td>
@@ -102,8 +91,6 @@ export default function AdminHome() {
     )
 }
 
-// 741 — StatCard: componente auxiliar local para os cards de estatística.
-// Recebe titulo, valor e cor opcional.
 function StatCard({ titulo, valor, cor }) {
     const corBadge = cor === 'verde' ? '#dcfce7' : '#dbeafe'
     const corTexto = cor === 'verde' ? '#15803d' : '#1d4ed8'

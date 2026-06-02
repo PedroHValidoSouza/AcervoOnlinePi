@@ -1,26 +1,20 @@
-// 741 — EditarPage: carrega os dados de uma obra pelo IDO e permite editá-los.
-// Usa PATCH /Api/livros/:idO para atualizar apenas os campos da obra principal
-// (título, autor, categoria, etc.) — não edita edições/exemplares aqui.
-// Para editar edições, use o fluxo de deletar + recriar pela LivrosPage.
 
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getLivro, atualizarLivro } from '../services/api'
 
 export default function EditarPage() {
-    const { idO }                 = useParams()  // 741 — Lê o IDO da URL (/admin/editar/:idO)
+    const { idO }                 = useParams() 
     const navigate                = useNavigate()
     const [form, setForm]         = useState(null)
     const [carregando, setCarregando] = useState(true)
     const [erro, setErro]         = useState('')
     const [enviando, setEnviando] = useState(false)
 
-    // 741 — Carrega os dados atuais da obra ao montar o componente.
     useEffect(() => {
         getLivro(idO)
             .then(livro => {
                 if (!livro) { setErro('Obra não encontrada'); setCarregando(false); return }
-                // 741 — Extrai apenas o primeiro autor para o formulário simplificado
                 setForm({
                     titulo:        livro.titulo || '',
                     subTitulo:     livro.subTitulo || '',
@@ -45,8 +39,7 @@ export default function EditarPage() {
         setErro('')
         setEnviando(true)
 
-        // 741 — Monta o body do PATCH com apenas os campos editáveis da obra.
-        // Edicoes e _id não são enviados para não sobrescrever acidentalmente.
+
         const corpo = {
             titulo:        form.titulo,
             subTitulo:     form.subTitulo,
@@ -121,7 +114,6 @@ export default function EditarPage() {
                     </div>
                 </div>
 
-                {/* 741 — Nota informativa: edições e exemplares são gerenciados na tela de acervo */}
                 <div className="card" style={{ background: '#fffbeb', borderColor: '#fcd34d' }}>
                     <p style={{ fontSize: 13, color: '#92400e' }}>
                         ℹ️ Para adicionar ou remover edições e exemplares, acesse a página

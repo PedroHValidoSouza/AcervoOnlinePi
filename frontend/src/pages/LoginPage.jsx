@@ -1,13 +1,7 @@
-// 741 — LoginPage: página de autenticação simples.
-// Credenciais fixas (admin/biblioteca123) para fins de demonstração.
-// Em produção, substitua por uma chamada real à API de usuários (FuncionarioSchema).
 
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-// 741 — Credenciais de demonstração hardcoded.
-// Para integrar com o banco, crie uma rota POST /Api/login no backend
-// que valide CPF/senha contra o FuncionarioSchema.
 const CREDENCIAIS_DEMO = { usuario: 'admin', senha: 'biblioteca123' }
 
 export default function LoginPage({ aoLogar }) {
@@ -18,7 +12,6 @@ export default function LoginPage({ aoLogar }) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        // 741 — Verifica credenciais localmente. Substitua por fetch à API se necessário.
         if (usuario === CREDENCIAIS_DEMO.usuario && senha === CREDENCIAIS_DEMO.senha) {
             aoLogar()
             navigate('/admin/home')
@@ -33,7 +26,6 @@ export default function LoginPage({ aoLogar }) {
                 <h1>Libzary</h1>
                 <p>Acesso à área administrativa</p>
 
-                {/* 741 — Exibe mensagem de erro apenas se houver tentativa falha */}
                 {erro && <div className="msg-erro">{erro}</div>}
 
                 <form onSubmit={handleSubmit}>
@@ -61,7 +53,6 @@ export default function LoginPage({ aoLogar }) {
                     <button type="submit" className="btn btn-primario">Entrar</button>
                 </form>
 
-                {/* 741 — Dica visível no ambiente de desenvolvimento */}
                 <p className="texto-leve" style={{ marginTop: 12, fontSize: 11 }}>
                     Demo: admin / biblioteca123
                 </p>

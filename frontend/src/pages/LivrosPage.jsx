@@ -1,7 +1,3 @@
-// 741 — LivrosPage: exibe a lista completa de obras do acervo.
-// Os dados são carregados diretamente da API MongoDB via getLivros().
-// Permite expandir cada obra para ver suas edições e exemplares,
-// além de deletar obras diretamente desta tela.
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
@@ -12,10 +8,8 @@ export default function LivrosPage() {
     const [carregando, setCarregando] = useState(true)
     const [erro, setErro]             = useState('')
     const [mensagem, setMensagem]     = useState('')
-    // 741 — expandido: controla qual obra está com suas edições visíveis na tabela
     const [expandido, setExpandido]   = useState(null)
 
-    // 741 — Carrega todos os livros ao montar o componente.
     function carregarLivros() {
         setCarregando(true)
         getLivros()
@@ -25,7 +19,6 @@ export default function LivrosPage() {
 
     useEffect(() => { carregarLivros() }, [])
 
-    // 741 — Confirma e deleta uma obra pelo IDO. Após remover, recarrega a lista.
     async function handleDeletar(idO, titulo) {
         if (!confirm(`Remover a obra "${titulo}" (IDO: ${idO}) do acervo?\nEssa ação é irreversível.`)) return
         try {
@@ -37,7 +30,6 @@ export default function LivrosPage() {
         }
     }
 
-    // 741 — Deleta uma edição específica pelo ISBN dentro de uma obra.
     async function handleDeletarEdicao(idO, iSBN) {
         if (!confirm(`Remover a edição ISBN ${iSBN}?`)) return
         try {
@@ -49,7 +41,6 @@ export default function LivrosPage() {
         }
     }
 
-    // 741 — Deleta um exemplar físico específico dentro de uma edição.
     async function handleDeletarExemplar(idO, iSBN, idEx) {
         if (!confirm(`Remover exemplar IDEx ${idEx}?`)) return
         try {
@@ -95,7 +86,6 @@ export default function LivrosPage() {
                             <tbody>
                                 {livros.map(livro => (
                                     <>
-                                        {/* 741 — Linha principal da obra */}
                                         <tr key={livro._id}>
                                             <td className="texto-leve">{livro.IDO}</td>
                                             <td className="negrito">{livro.titulo}
@@ -113,7 +103,6 @@ export default function LivrosPage() {
                                                     : '—'}
                                             </td>
                                             <td>
-                                                {/* 741 — Botão expande/colapsa as edições na tabela */}
                                                 <button
                                                     className="btn btn-secundario btn-pequeno"
                                                     onClick={() => setExpandido(expandido === livro.IDO ? null : livro.IDO)}
@@ -140,7 +129,6 @@ export default function LivrosPage() {
                                             </td>
                                         </tr>
 
-                                        {/* 741 — Linhas de edições: mostradas apenas quando a obra está expandida */}
                                         {expandido === livro.IDO && livro.Edicoes?.map(edicao => (
                                             <>
                                                 <tr key={edicao.ISBN} style={{ background: '#f8fafc' }}>
@@ -171,7 +159,6 @@ export default function LivrosPage() {
                                                     </td>
                                                 </tr>
 
-                                                {/* 741 — Linhas de exemplares dentro da edição expandida */}
                                                 {edicao.Exemplares?.map(ex => (
                                                     <tr key={ex.IDEx} style={{ background: '#f1f5f9' }}>
                                                         <td></td>
