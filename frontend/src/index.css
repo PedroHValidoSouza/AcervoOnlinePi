@@ -1,0 +1,404 @@
+/* 741 — Reset e base global. Sem animações, sem efeitos visuais complexos.
+   O foco é clareza e funcionalidade para uso interno da biblioteca. */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 741 — Variáveis de cor centralizadas. Altere aqui para mudar o tema inteiro. */
+:root {
+  --cor-primaria: #1a56a0;
+  --cor-primaria-hover: #154a8a;
+  --cor-perigo: #c0392b;
+  --cor-perigo-hover: #a93226;
+  --cor-sucesso: #27ae60;
+  --cor-fundo: #f4f6f9;
+  --cor-branco: #ffffff;
+  --cor-borda: #dde1e7;
+  --cor-texto: #1f2937;
+  --cor-texto-leve: #6b7280;
+  --cor-sidebar: #1e293b;
+  --cor-sidebar-texto: #cbd5e1;
+  --cor-sidebar-ativo: #3b82f6;
+  --altura-header: 56px;
+  --largura-sidebar: 220px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  line-height: 1.5;
+}
+
+/* ── Layout principal ───────────────────────────────────────────── */
+/* 741 — Layout de duas colunas: sidebar fixa à esquerda + conteúdo principal. */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: var(--largura-sidebar);
+  background: var(--cor-sidebar);
+  color: var(--cor-sidebar-texto);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.sidebar-logo {
+  padding: 18px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  border-bottom: 1px solid #334155;
+  letter-spacing: -0.3px;
+}
+
+.sidebar nav {
+  flex: 1;
+  padding: 12px 0;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 9px 20px;
+  color: var(--cor-sidebar-texto);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+/* 741 — NavLink ativo recebe a classe .active automaticamente pelo React Router. */
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background: rgba(59, 130, 246, 0.15);
+  color: #fff;
+  border-left: 3px solid var(--cor-sidebar-ativo);
+  padding-left: 17px;
+}
+
+.sidebar-footer {
+  padding: 14px 20px;
+  border-top: 1px solid #334155;
+}
+
+/* 741 — Área principal empurrada para a direita pelo tamanho da sidebar. */
+.conteudo-principal {
+  margin-left: var(--largura-sidebar);
+  flex: 1;
+  padding: 28px 32px;
+  max-width: 1100px;
+}
+
+/* ── Cabeçalho de página ─────────────────────────────────────────── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
+.page-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────── */
+.card {
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+/* ── Tabela ─────────────────────────────────────────────────────── */
+.tabela-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead th {
+  background: #f8fafc;
+  border-bottom: 2px solid var(--cor-borda);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--cor-texto-leve);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody td {
+  padding: 10px 12px;
+  vertical-align: middle;
+}
+
+/* ── Formulários ─────────────────────────────────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-grid.col-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-grid.col-1 {
+  grid-template-columns: 1fr;
+}
+
+/* 741 — .form-grupo: bloco label + input padrão usado em todos os formulários. */
+.form-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-grupo.span-2 {
+  grid-column: span 2;
+}
+
+.form-grupo label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cor-texto-leve);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.form-grupo input,
+.form-grupo select,
+.form-grupo textarea {
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--cor-texto);
+  background: #fff;
+  width: 100%;
+}
+
+.form-grupo input:focus,
+.form-grupo select:focus,
+.form-grupo textarea:focus {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: -1px;
+  border-color: transparent;
+}
+
+.form-grupo textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ── Botões ─────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btn-primario {
+  background: var(--cor-primaria);
+  color: #fff;
+}
+
+.btn-primario:hover {
+  background: var(--cor-primaria-hover);
+}
+
+.btn-perigo {
+  background: var(--cor-perigo);
+  color: #fff;
+}
+
+.btn-perigo:hover {
+  background: var(--cor-perigo-hover);
+}
+
+.btn-secundario {
+  background: #f1f5f9;
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+}
+
+.btn-secundario:hover {
+  background: #e2e8f0;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--cor-primaria);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.btn-pequeno {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.acoes-linha {
+  display: flex;
+  gap: 6px;
+}
+
+/* ── Badges ─────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge-verde { background: #dcfce7; color: #15803d; }
+.badge-vermelho { background: #fee2e2; color: #b91c1c; }
+.badge-cinza { background: #f1f5f9; color: #64748b; }
+.badge-azul { background: #dbeafe; color: #1d4ed8; }
+
+/* ── Mensagens de estado ─────────────────────────────────────────── */
+.estado-vazio {
+  text-align: center;
+  padding: 40px;
+  color: var(--cor-texto-leve);
+  font-size: 14px;
+}
+
+.msg-erro {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.msg-sucesso {
+  background: #dcfce7;
+  color: #15803d;
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+/* ── Login ──────────────────────────────────────────────────────── */
+.pagina-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cor-fundo);
+}
+
+.login-card {
+  width: 340px;
+}
+
+.login-card h1 {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.login-card p {
+  color: var(--cor-texto-leve);
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Barra de busca ─────────────────────────────────────────────── */
+.barra-busca {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.barra-busca input {
+  flex: 1;
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+/* ── Modal ──────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 6px;
+  padding: 24px;
+  width: 520px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal h2 {
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+.modal-rodape {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+/* ── Utilitários ─────────────────────────────────────────────────── */
+.texto-leve { color: var(--cor-texto-leve); }
+.negrito { font-weight: 600; }
+.mb-16 { margin-bottom: 16px; }
+.mb-8 { margin-bottom: 8px; }
+.flex-gap { display: flex; gap: 8px; align-items: center; }
