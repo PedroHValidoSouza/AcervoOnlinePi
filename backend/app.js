@@ -21,8 +21,8 @@ app.use("/Api/", router);
 const PORTA = process.env.PORT || 3000;
 
 app.listen(PORTA, () => {
-    console.log(`🚀 API-Biblioteca rodando em http://localhost:${PORTA}/Api/`);
-    console.log(`   Rotas disponíveis:`);
+    console.log(`Biblioteca rodando em http://localhost:${PORTA}/Api/`);
+    console.log(` `);
     console.log(`   GET    /Api/livros`);
     console.log(`   POST   /Api/livros`);
     console.log(`   GET    /Api/livros/:idO`);
